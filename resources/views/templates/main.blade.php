@@ -63,7 +63,9 @@
                     </div>
                 </div>
             </nav>
-
+            <div class="w-5/6 mx-auto m-6">
+                @include('admin.users.partials.alerts')
+            </div>
             @yield('content')
         </div>
     </body>

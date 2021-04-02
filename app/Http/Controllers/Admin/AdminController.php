@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -35,10 +36,12 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $user = User::create($request->except(['_token', 'roles']));
+        $validateUsers = $request->validated();
+        $user = User::create($validateUsers);
         $user->roles()->sync($request->roles);
+        $request->session()->flash('success','User created successfully');
         return redirect(route('users.index'));
     }
 
@@ -81,6 +84,7 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->except(['_token', 'roles']));
         $user->roles()->sync($request->roles);
+        $request->session()->flash('success','User updated successfully');
         return redirect(route('users.index'));
     }
 
@@ -90,9 +94,10 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         User::destroy($id);
+        $request->session()->flash('success','User deleted successfully');
         return redirect(route('users.index'));
     }
 }
