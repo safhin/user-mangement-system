@@ -1,8 +1,16 @@
 @extends('templates.main')
 
 @section('content')
-    <h3>Users</h3>
-    <table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800">
+<div class="w-5/6 mx-auto m-6">
+    <div class="flex">
+        <div class="flex-1">
+            <h1 class="text-xl text-bold">Users</h1>
+        </div>
+        <div lass="flex-1">
+            <a href="{{ route('users.create') }}" class="bg-blue-500 px-4 py-2 rounded-sm text-white" role="button">Create</a>
+        </div>
+    </div>
+    <table class="rounded-t-lg w-full p-5 bg-gray-200 text-gray-800 mt-6">
         <tr class="text-left border-b-2 border-gray-300">
             <th class="px-4 py-3">#Id</th>
             <th class="px-4 py-3">Name</th>
@@ -27,4 +35,5 @@
         @endforeach
     </table>
     {{ $users->links() }}
+</div>
 @endsection
