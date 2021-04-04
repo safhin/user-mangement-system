@@ -7,7 +7,7 @@
             <h1 class="text-xl text-bold">Users</h1>
         </div>
         <div lass="flex-1">
-            <a href="{{ route('users.create') }}" class="bg-blue-500 px-4 py-2 rounded-sm text-white" role="button">Create</a>
+            <a href="{{ route('admin.users.create') }}" class="bg-blue-500 px-4 py-2 rounded-sm text-white" role="button">Create</a>
         </div>
     </div>
     <table class="rounded-t-lg w-full p-5 bg-gray-200 text-gray-800 mt-6">
@@ -24,9 +24,9 @@
                 <td class="px-4 py-3">{{ $user->name }}</td>
                 <td class="px-4 py-3">{{ $user->email }}</td>
                 <td class="px-4 py-3">
-                    <a href="{{ route('users.edit',$user->id) }}" class="bg-blue-500 px-4 py-2 rounded-sm text-white" role="button">Edit</a>
+                    <a href="{{ route('admin.users.edit',$user->id) }}" class="bg-blue-500 px-4 py-2 rounded-sm text-white" role="button">Edit</a>
                     <button type="button" class="bg-red-500 px-4 py-2 rounded-sm text-white" onclick="event.preventDefault(); document.getElementById('delete-user-form-{{ $user->id }}').submit()">Delete</button>
-                    <form id="delete-user-form-{{ $user->id }}" action="{{ route('users.destroy',$user->id) }}" method="post" style="display: none;">
+                    <form id="delete-user-form-{{ $user->id }}" action="{{ route('admin.users.destroy',$user->id) }}" method="post" style="display: none;">
                         @csrf
                         @method('DELETE')
                     </form>
